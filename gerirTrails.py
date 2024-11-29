@@ -1,7 +1,5 @@
-from encodings.utf_7 import encode
-
-
 class TrailManager:
+    # Create a trail
     def createTrail(self):
         nome = input('Nome do trilho -> ')
         ilha = input('Ilha -> ')
