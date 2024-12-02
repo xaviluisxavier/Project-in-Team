@@ -82,7 +82,7 @@ class TrailManager:
                         file.write(';'.join(a))
                         print(f'Categoria: {categoria} | atualizada no trilho: {nome_trilho} | Atualizaçao: {novo_valor}')
             return None
-
+        # Read a Trail from the Trail File
     def readTrail(self, filename: str):
             nome_trilho = input('Insira o nome do trilho -> ')
             file = open(filename, 'r', encoding='utf-8')
@@ -94,6 +94,5 @@ class TrailManager:
                     print(" | ".join(line.split(';')))  # Usa ' | ' como separador entre os campos
                 else:
                     pass
-
             file.close()
             return None
