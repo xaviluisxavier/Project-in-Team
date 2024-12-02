@@ -1,0 +1,18 @@
+[
+    {
+        "nome": "luis",
+        "experiencia": 2,
+        "contato": {
+            "telefone": "999999999",
+            "email": "xavi@gmail.com"
+        },
+        "idiomas": [
+            "pt",
+            "rn"
+        ],
+        "disponibilidade": [
+            "sexta",
+            "sabado"
+        ]
+    }
+]
