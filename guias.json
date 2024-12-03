@@ -1,16 +1,16 @@
 [
     {
-        "nome": "luis",
-        "experiencia": 2,
-        "contato": {
-            "telefone": "999999999",
+        "name": "luis",
+        "eexperience": 2,
+        "contact": {
+            "number": "999999999",
             "email": "xavi@gmail.com"
         },
-        "idiomas": [
+        "languages": [
             "pt",
             "rn"
         ],
-        "disponibilidade": [
+        "availability": [
             "sexta",
             "sabado"
         ]

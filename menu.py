@@ -1,83 +1,69 @@
-from gerirTrails import TrailManager
-from gerirGuias import Guia
-
+from TrailManager import TrailManager
+from GuideManager import Guide
 
 def show_menu():
     print('\nMENU')
-    print('1. Gerir Trilhos')
-    print('2. Gerir Guias')
-    print('3. Sair')
-
+    print('1. Manage Trails')
+    print('2. Manage Guides')
+    print('3. Exit')
 
 def show_submenu():
-    print('1 - Criar Trilho')
-    print('2 - Atualizar Trilhos')
-    print('3 - Remover Trilhos')
-    print('4 - Visualizar Trilho')
-    print('5 - Voltar')
+    print('1 - Create Trail')
+    print('2 - Update Trails')
+    print('3 - Remove Trails')
+    print('4 - View Trail')
+    print('5 - Back')
 
-
-def show_submenu_guia():
-    print('1 - Criar Guia')
-    print('2 - Atualizar Guias')
-    print('3 - Remover Guias')
-    print('4 - Visualizar Guia')
-    print('5 - Voltar')
-
+def show_guide_submenu():
+    print('1 - Create Guide')
+    print('2 - Update Guides')
+    print('3 - Remove Guides')
+    print('4 - View Guide')
+    print('5 - Back')
 
 def main():
-    # Criar uma instância da classe TrailManager e Guia
+    # Create an instance of TrailManager and Guide classes
     trail_manager = TrailManager()
-    guia_manager = Guia()
-
+    guide_manager = Guide()
     while True:
         show_menu()
-        opcao1 = input('Escolha uma opção -> ')
-
-        if opcao1 == '1':
+        option1 = input('Choose an option -> ')
+        if option1 == '1':
             while True:
                 show_submenu()
-                opcao2 = input('Escolha uma opção -> ')
-                if opcao2 == '1':
+                option2 = input('Choose an option -> ')
+                if option2 == '1':
                     trail_manager.createTrail('trails.csv')
-                elif opcao2 == '2':
+                elif option2 == '2':
                     trail_manager.updateTrail("trails.csv")
-                elif opcao2 == '3':
+                elif option2 == '3':
                     trail_manager.removeTrail('trails.csv')
-                elif opcao2 == '4':
+                elif option2 == '4':
                     trail_manager.readTrail('trails.csv')
-                elif opcao2 == '5':
+                elif option2 == '5':
                     break
                 else:
-                    print("Opção inválida. Tente novamente.")
-
-        elif opcao1 == '2':
+                    print("Invalid option. Try again.")
+        elif option1 == '2':
             while True:
-                show_submenu_guia()
-                opcao3 = input('Escolha uma opção -> ')
-                if opcao3 == '1':
-                    guia_manager.adicionar_guia('guias.json')
-                elif opcao3 == '2':
+                show_guide_submenu()
+                option3 = input('Choose an option -> ')
+                if option3 == '1':
+                    guide_manager.add_guide('guides.json')
+                elif option3 == '2':
                     pass
-                    # guia_manager.atualizar_guia('guias.json')  # Supondo que esse método exista
-                elif opcao3 == '3':
+                elif option3 == '3':
                     pass
-                   # guia_manager.remover_guia('guias.json')  # Supondo que esse método exista
-                elif opcao3 == '4':
+                elif option3 == '4':
                     pass
-                   # guia_manager.visualizar_guia('guias.json')  # Supondo que esse método exista
-                elif opcao3 == '5':
+                elif option3 == '5':
                     break
                 else:
-                    print("Opção inválida. Tente novamente.")
-
-        elif opcao1 == '3':
-            print("Saindo do programa...")
+                    print("Invalid option. Try again.")
+        elif option1 == '3':
+            print("Exiting the program...")
             break
-
         else:
-            print("Opção inválida. Tente novamente.")
-
-
+            print("Invalid option. Try again.")
 if __name__ == '__main__':
     main()
