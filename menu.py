@@ -29,12 +29,10 @@ def main():
     while True:
         show_menu()
         option1 = input('Choose an option -> ')
-
         if option1 == '1':
             while True:
                 show_submenu()
                 option2 = input('Choose an option -> ')
-
                 if option2 == '1':
                     # Create a new trail
                     trail_manager.create_trail('trails.csv')  # Calls create_trail method
@@ -51,12 +49,10 @@ def main():
                     break  # Go back to main menu
                 else:
                     print("Invalid option. Try again.")
-
         elif option1 == '2':
             while True:
                 show_guide_submenu()
                 option3 = input('Choose an option -> ')
-
                 if option3 == '1':
                     guide_manager.add_guide('guides.json')  # Ensure this method exists
                 elif option3 == '2':
@@ -69,13 +65,11 @@ def main():
                     break  # Go back to main menu
                 else:
                     print("Invalid option. Try again.")
-
         elif option1 == '3':
             print("Exiting the program...")
             break
-
         else:
             print("Invalid option. Try again.")
 
-if __name__ == '__main__':
-    main()
+
+main()
