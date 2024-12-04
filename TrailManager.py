@@ -1,6 +1,6 @@
 class TrailManager:
     def __init__(self):
-        self._id = ""  # New attribute for the trail ID
+        self._id = ""
         self._name = ""
         self._island = ""
         self._council = ""
