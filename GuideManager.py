@@ -2,14 +2,14 @@ import json
 class Guide:
     @staticmethod
     def add_guide(filename: str):
-        """Collects information from the guide and adds it to the JSON file."""
+        # Collects information from the guide and adds it to the JSON file.
         # Collects user information
         name = input("Enter guide's name: ")
         experience = int(input("Enter experience (in years): "))
         number = input("Enter the guide's phone number: ")
         email = input("Enter the guide's email: ")
-        languages = input("Enter languages ​​(separated by comma): ").split(',')
-        availability = input("Enter availability (seperated by comma): ").split(',')
+        languages = input("Enter languages (separated by ,): ").split(',')
+        availability = input("Enter availability (seperated by ,): ").split(',')
         # Creation of the new guide dictionary
         new_guide = {
             "name": name,
