@@ -1,5 +1,6 @@
 class TrailManager:
     def __init__(self):
+        self.trail_id = ""
         self._id = ""
         self._name = ""
         self._island = ""
@@ -87,54 +88,38 @@ class TrailManager:
 
     def create_trail(self, filename: str):
         # Set the trail ID
-        self.set_id(input('Trail ID -> '))  # Ask for the trail ID
+        self.set_id(input('Trail ID -> '))
         self.set_name(input('Trail name -> '))
         self.set_island(input('Island -> '))
         self.set_council(input('Municipal Council -> '))
         self.set_coordinates_GPS(input('GPS Coordinates -> '))
-
         print("Degree of difficulty:")
         print("1. Easy")
         print("2. Medium")
         print("3. Hard")
-
         choice = input('Choose the Degree of difficulty (1/2/3) -> ')
-
         difficulties = ['Easy', 'Medium', 'Hard']
-
         self.set_difficulty(difficulties[int(choice) - 1])
-
         print("Extension:")
-
         print("1. 0-5km")
         print("2. 5-10km")
         print("3. 10-15km")
         print("4. 15-30km")
         print("5. +30km")
-
         choice = input('Choose the extension (1/2/3/4/5) -> ')
-
         extensions = ['0-5km', '5-10km', '10-15km', '15-30km', '+30km']
-
         self.set_extension(extensions[int(choice) - 1])
-
         print("Form:")
-
         print("1. Circular")
         print("2. Linear")
-
         choice = input('Choose the format (1/2) -> ')
-
         forms = ['Circular', 'Linear']
-
         self.set_form(forms[int(choice) - 1])
-
         self.set_description(input('Brief description -> '))
-
         # Save trail data
         with open(filename, 'a', encoding='utf-8') as file:
             trail_data = ';'.join([
-                self.get_id(),  # Include ID in the saved data
+                self.get_id(),
                 self.get_name(),
                 self.get_island(),
                 self.get_council(),
@@ -145,49 +130,37 @@ class TrailManager:
                 self.get_description()
             ])
             file.write('\n' + trail_data)
-
         print(f"Trail: {self.get_name()} successfully created!")
-
-# Removes a Trail from the Trail File
+    # Removes a Trail from the Trail File
     def remove_trail(self, filename: str):
         # Ask for the trail ID to be removed
-        self.trail_id = input('Trail ID to be removed -> ')
-
+        self._id = input('Trail ID to be removed -> ')
         # Open the file and read lines
         with open(filename, 'r', encoding='utf-8') as file:
             lines = file.readlines()
-
         lst = []
-
         # Iterate through the lines to find the trail with the specified ID
         for line in lines:
-            if not self.trail_id in line.split(';')[0]:  # Assuming ID is the first element
+            if not self._id in line.split(';')[0]:
                 lst.append(line)
-
         # Write back the remaining lines to the file
         with open(filename, 'w', encoding='utf-8') as file:
             for line in lst:
                 file.write(line)
-
-        print(f"Trail with ID: {self.trail_id} successfully removed!")
-
+        print(f"Trail with ID: {self._id} successfully removed!")
+    # Update a category Trail from the Trail File
     def update_trail(self, filename: str):
         self._id = input('ID of the Trail to be updated -> ')  # Use a local variable for ID
         category = input(
             'Category to be updated (name, island, council, coordinates_GPS, difficulty, extension, form, description) -> ')
-
         # Open the file and read lines
         with open(filename, 'r', encoding='utf-8') as file:
             lines = file.readlines()
-
         # Variable to hold updated line
         updated_line = None
-
         for line in lines:
             if self._id in line.split(';')[0]:  # Check if the ID matches
                 a = line.split(';')
-
-                # Retrieve current value using getter if applicable
                 if category.lower() == 'name':
                     current_value = a[1]  # Assuming name is at index 1
                     new_value = input(f'Current value is "{current_value}". New value for {category} -> ')
@@ -239,7 +212,6 @@ class TrailManager:
                 # Create updated line from modified list
                 updated_line = ';'.join(a) + '\n'
                 break  # Exit loop after updating
-
         # Write back updated lines to the file if an update occurred
         if updated_line:
             with open(filename, 'w', encoding='utf-8') as file:
@@ -248,24 +220,18 @@ class TrailManager:
                         file.write(updated_line)  # Write updated line
                     else:
                         file.write(line)  # Write unchanged lines
-
             print(f'Trail with ID: {self._id} successfully updated!')
         else:
             print(f"No trail found with ID: {self._id}")  # Print message if no match was found
 
-
     def read_trail(self, filename: str):
         self._id = input('Enter the trail ID -> ')  # Change from name to ID
-
         file = open(filename, 'r', encoding='utf-8')
         lines = file.readlines()
-
         found = False  # Flag to check if any trail is found
-
         for line in lines:
             if self._id in line.split(';')[0]:  # Checks if the trail ID is in the first column
                 found = True
-                # Assuming you have a way to set the current values based on this line
                 a = line.split(';')
                 self.set_id(a[0])
                 self.set_name(a[1])
@@ -276,11 +242,8 @@ class TrailManager:
                 self.set_extension(a[6])
                 self.set_form(a[7])
                 self.set_description(a[8])
-
                 print("Trail informations:")
                 print(" | ".join(line.split(';')))  # Use ' | ' as separator between fields
-
         file.close()
-
         if not found:
-            print(f"No trail found with ID: {self._id}")  # Print message if no match was found
+            print(f"No trail found with ID: {self._id}")
