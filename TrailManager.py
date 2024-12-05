@@ -77,7 +77,6 @@ class TrailManager:
     def create_trail(self, filename: str):
         print("\n--- Create New Trail ---")
         while True:
-            try:
                 # Set the trail ID
                 id = input('Trail ID (or "exit" to terminate) -> ').strip()
                 if id.lower() == 'exit':
@@ -152,15 +151,11 @@ class TrailManager:
                     ])
                     file.write(trail_data + '\n')
                 print(f"Trail: {self.get_name()} successfully created!")
-            except ValueError as ve:
-                print(f"{ve} Please try again.")
-            except Exception as e:
-                print(f"An unexpected error occurred: {e}. Please try again.")
+
     print("Trail creation process finished.")
     # Removes a Trail from the Trail File
     def remove_trail(self, filename: str):
         while True:
-            try:
                 # Ask for the trail ID to be removed
                 trail_id = input('Trail ID to be removed (or "exit" to cancel) -> ').strip()
                 if trail_id.lower() == 'exit':
@@ -188,13 +183,11 @@ class TrailManager:
                     file.writelines(updated_lines)
                 print(f"Trail with ID: {trail_id} successfully removed!")
                 break
-            except Exception as e:
-                print(f"An unexpected error occurred: {e}. Please try again.")
         print("Trail removal process finished.")
+
     # Update a category Trail from the Trail File
     def update_trail(self, filename: str):
         while True:  # Loop para permitir múltiplas tentativas
-            try:
                 self._id = input('ID of the Trail to be updated (or "exit" to cancel) -> ').strip()
                 if self._id.lower() == 'exit':
                     print("Update cancelled.")
@@ -205,7 +198,6 @@ class TrailManager:
                 # Open the file and read lines
                 with open(filename, 'r', encoding='utf-8') as file:
                     lines = file.readlines()
-
                 # Check if the ID exists in the file
                 id_found = False  # Flag to check if ID was found
                 for line in lines:
@@ -318,10 +310,6 @@ class TrailManager:
                             file.write(updated_line if self._id in line.split(';')[0] else line)
                     print(f'Trail with ID: {self._id} successfully updated!')
                     return  # Exit the method after successful update
-
-            except Exception as e:
-                print(f"An unexpected error occurred: {e}. Please try again.")  # Handle any other unexpected errors
-
         print("Update process finished.")  # Final message after exiting the loop
 
     def read_trail(self, filename: str):
