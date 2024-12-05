@@ -54,7 +54,7 @@ def main():
                 show_guide_submenu()
                 option3 = input('Choose an option -> ')
                 if option3 == '1':
-                    guide_manager.add_guide('guides.json')  # Ensure this method exists
+                    guide_manager.add_guide('guides.json')
                 elif option3 == '2':
                     pass  # Implement update functionality
                 elif option3 == '3':
@@ -70,6 +70,5 @@ def main():
             break
         else:
             print("Invalid option. Try again.")
-
 
 main()
