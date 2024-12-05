@@ -40,38 +40,29 @@ class TrailManager:
 
     # Setter methods
     def set_id(self, value):
-        if value:
             self._id = value
+
     def set_name(self, value):
-        if value:
             self._name = value
     def set_island(self, value):
-        if value:
             self._island = value
 
     def set_council(self, value):
-        if value:
             self._council = value
 
     def set_coordinates_GPS(self, value):
-        if value:
             self._coordinates_GPS = value
 
     def set_difficulty(self, value):
-        if value  in ['Easy', 'Medium', 'Hard']:
-            self._difficulty = value
+             self._difficulty = value
 
     def set_extension(self, value):
-        valid_extensions = ['0-5km', '5-10km', '10-15km', '15-30km', '+30km']
-        if value in valid_extensions:
             self._extension = value
 
     def set_form(self, value):
-        if value in ['Circular', 'Linear']:
             self._form = value
 
     def set_description(self, value):
-        if value:
             self._description = value
 
     def create_trail(self, filename: str):
