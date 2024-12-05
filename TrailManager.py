@@ -151,8 +151,8 @@ class TrailManager:
                     ])
                     file.write(trail_data + '\n')
                 print(f"Trail: {self.get_name()} successfully created!")
-
     print("Trail creation process finished.")
+
     # Removes a Trail from the Trail File
     def remove_trail(self, filename: str):
         while True:
@@ -195,26 +195,21 @@ class TrailManager:
             if not self._id:
                 print("Trail ID cannot be empty. Please try again.")
                 continue  # Continue the loop for valid ID input
-
             # Open the file and read lines
             with open(filename, 'r', encoding='utf-8') as file:
                 lines = file.readlines()
-
             # Check if the ID exists in the file
             id_found = False  # Flag to check if ID was found
             for line in lines:
                 if self._id in line.split(';')[0]:  # Check if the ID matches
                     id_found = True  # Set flag to true if ID is found
                     break  # Exit loop if ID is found
-
             if not id_found:  # Check if the ID was found after the loop
                 print(f"No trail found with ID: {self._id}. Please try again.")
                 continue  # Continue the loop to allow another attempt
-
             while True:  # Loop for category input
                 category = input(
                     'Category to be updated (name, island, council, coordinates_GPS, difficulty, extension, form, description) -> ').strip().lower()
-
                 # Validate category
                 valid_categories = ['name', 'island', 'council', 'coordinates_gps', 'difficulty', 'extension', 'form',
                                     'description']
@@ -222,24 +217,19 @@ class TrailManager:
                     break  # Exit loop if valid category is provided
                 else:
                     print(f"Invalid category. Please choose from: {', '.join(valid_categories)}")
-
             # Variable to hold updated line
             updated_line = None
             for line in lines:
                 if self._id in line.split(';')[0]:  # Check if the ID matches
                     a = line.strip().split(';')
-                    current_value = None  # Initialize current_value to None
-
                     while True:  # Loop for new value input based on category
                         current_value = a[
                             valid_categories.index(category) + 1]  # Get current value based on category index
                         new_value = input(
                             f'Current value is "{current_value}". New value for {category} -> ').strip()
-
                         if not new_value:
                             print(f"{category.capitalize()} cannot be empty. Please enter a valid value.")
                             continue  # Continue prompting for a new value
-
                         # Update using setter based on category
                         if category == 'name':
                             self.set_name(new_value)
@@ -265,13 +255,10 @@ class TrailManager:
                         elif category == 'description':
                             self.set_description(new_value)
                             a[8] = new_value
-
                         # Create updated line from modified list
                         updated_line = ';'.join(a) + '\n'
                         break  # Exit loop after updating
-
                     break  # Exit outer loop after finding and updating
-
             # Write back updated lines to the file if an update occurred
             if updated_line:
                 with open(filename, 'w', encoding='utf-8') as file:
@@ -279,8 +266,8 @@ class TrailManager:
                         file.write(updated_line if self._id in line.split(';')[0] else line)
                 print(f'Trail with ID: {self._id} successfully updated!')
                 return  # Exit the method after successful update
-
         print("Update process finished.")  # Final message after exiting the loop
+
     #read a trail in the trail file
     def read_trail(self, filename: str):
         self._id = input('Enter the trail ID -> ')  # Change from name to ID
