@@ -187,115 +187,82 @@ class TrailManager:
 
     # Update a category Trail from the Trail File
     def update_trail(self, filename: str):
-        while True:  # Loop para permitir múltiplas tentativas
-                self._id = input('ID of the Trail to be updated (or "exit" to cancel) -> ').strip()
-                if self._id.lower() == 'exit':
-                    print("Update cancelled.")
-                    return
-                if not self._id:
-                    raise ValueError("Trail ID cannot be empty.")
+        while True:  # Loop to allow multiple attempts
+            self._id = input('ID of the Trail to be updated (or "exit" to cancel) -> ').strip()
+            if self._id.lower() == 'exit':
+                print("Update cancelled.")
+                return
+            if not self._id:
+                print("Trail ID cannot be empty. Please try again.")
+                continue  # Continue the loop for valid ID input
 
-                # Open the file and read lines
-                with open(filename, 'r', encoding='utf-8') as file:
-                    lines = file.readlines()
-                # Check if the ID exists in the file
-                id_found = False  # Flag to check if ID was found
-                for line in lines:
-                    if self._id in line.split(';')[0]:  # Check if the ID matches
-                        id_found = True  # Set flag to true if ID is found
-                        break  # Exit loop if ID is found
+            # Open the file and read lines
+            with open(filename, 'r', encoding='utf-8') as file:
+                lines = file.readlines()
 
-                if not id_found:  # Check if the ID was found after the loop
-                    print(f"No trail found with ID: {self._id}. Please try again.")
-                    continue  # Continue the loop to allow another attempt
+            # Check if the ID exists in the file
+            id_found = False  # Flag to check if ID was found
+            for line in lines:
+                if self._id in line.split(';')[0]:  # Check if the ID matches
+                    id_found = True  # Set flag to true if ID is found
+                    break  # Exit loop if ID is found
 
+            if not id_found:  # Check if the ID was found after the loop
+                print(f"No trail found with ID: {self._id}. Please try again.")
+                continue  # Continue the loop to allow another attempt
+
+            while True:  # Loop for category input
                 category = input(
                     'Category to be updated (name, island, council, coordinates_GPS, difficulty, extension, form, description) -> ').strip().lower()
 
                 # Validate category
                 valid_categories = ['name', 'island', 'council', 'coordinates_gps', 'difficulty', 'extension', 'form',
                                     'description']
-                if category not in valid_categories:
-                    raise ValueError(f"Invalid category. Please choose from: {', '.join(valid_categories)}")
+                if category in valid_categories:
+                    break  # Exit loop if valid category is provided
+                else:
+                    print(f"Invalid category. Please choose from: {', '.join(valid_categories)}")
 
-                # Variable to hold updated line
-                updated_line = None
+            # Variable to hold updated line
+            updated_line = None
+            for line in lines:
+                if self._id in line.split(';')[0]:  # Check if the ID matches
+                    a = line.strip().split(';')
+                    current_value = None  # Initialize current_value to None
 
-                for line in lines:
-                    if self._id in line.split(';')[0]:  # Check if the ID matches
-                        a = line.strip().split(';')
+                    while True:  # Loop for new value input based on category
+                        current_value = a[
+                            valid_categories.index(category) + 1]  # Get current value based on category index
+                        new_value = input(
+                            f'Current value is "{current_value}". New value for {category} -> ').strip()
 
-                        current_value = None  # Initialize current_value to None
+                        if not new_value:
+                            print(f"{category.capitalize()} cannot be empty. Please enter a valid value.")
+                            continue  # Continue prompting for a new value
 
+                        # Update using setter based on category
                         if category == 'name':
-                            current_value = a[1]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Name cannot be empty.")
-                            self.set_name(new_value)  # Update using setter
-                            a[1] = new_value  # Update list
-
+                            self.set_name(new_value)
+                            a[1] = new_value
                         elif category == 'island':
-                            current_value = a[2]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Island cannot be empty.")
                             self.set_island(new_value)
                             a[2] = new_value
-
                         elif category == 'council':
-                            current_value = a[3]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Council cannot be empty.")
                             self.set_council(new_value)
                             a[3] = new_value
-
                         elif category == 'coordinates_gps':
-                            current_value = a[4]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Coordinates GPS cannot be empty.")
                             self.set_coordinates_GPS(new_value)
                             a[4] = new_value
-
                         elif category == 'difficulty':
-                            current_value = a[5]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Difficulty cannot be empty.")
                             self.set_difficulty(new_value)
                             a[5] = new_value
-
                         elif category == 'extension':
-                            current_value = a[6]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Extension cannot be empty.")
                             self.set_extension(new_value)
                             a[6] = new_value
-
                         elif category == 'form':
-                            current_value = a[7]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Form cannot be empty.")
                             self.set_form(new_value)
                             a[7] = new_value
-
                         elif category == 'description':
-                            current_value = a[8]
-                            new_value = input(
-                                f'Current value is "{current_value}". New value for {category} -> ').strip()
-                            if not new_value:
-                                raise ValueError("Description cannot be empty.")
                             self.set_description(new_value)
                             a[8] = new_value
 
@@ -303,15 +270,18 @@ class TrailManager:
                         updated_line = ';'.join(a) + '\n'
                         break  # Exit loop after updating
 
-                # Write back updated lines to the file if an update occurred
-                if updated_line:
-                    with open(filename, 'w', encoding='utf-8') as file:
-                        for line in lines:
-                            file.write(updated_line if self._id in line.split(';')[0] else line)
-                    print(f'Trail with ID: {self._id} successfully updated!')
-                    return  # Exit the method after successful update
-        print("Update process finished.")  # Final message after exiting the loop
+                    break  # Exit outer loop after finding and updating
 
+            # Write back updated lines to the file if an update occurred
+            if updated_line:
+                with open(filename, 'w', encoding='utf-8') as file:
+                    for line in lines:
+                        file.write(updated_line if self._id in line.split(';')[0] else line)
+                print(f'Trail with ID: {self._id} successfully updated!')
+                return  # Exit the method after successful update
+
+        print("Update process finished.")  # Final message after exiting the loop
+    #read a trail in the trail file
     def read_trail(self, filename: str):
         self._id = input('Enter the trail ID -> ')  # Change from name to ID
         file = open(filename, 'r', encoding='utf-8')
