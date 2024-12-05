@@ -76,82 +76,82 @@ class TrailManager:
 
     def create_trail(self, filename: str):
         print("\n--- Create New Trail ---")
-        while True:
-                # Set the trail ID
-                id = input('Trail ID (or "exit" to terminate) -> ').strip()
-                if id.lower() == 'exit':
-                    return
-                while not id:
-                    id = input('ID cannot be empty. Trail ID -> ').strip()
-                self.set_id(id)
 
-                # Set other attributes
-                name = input('Trail name -> ').strip()
-                while not name:
-                    name = input('Name cannot be empty. Trail name -> ').strip()
-                self.set_name(name)
+        # Set the trail ID
+        id = input('Trail ID (or "exit" to terminate) -> ').strip()
+        if id.lower() == 'exit':
+            return
+        while not id:
+            id = input('ID cannot be empty. Trail ID -> ').strip()
+        self.set_id(id)
 
-                island = input('Island -> ').strip()
-                while not island:
-                    island = input('Island cannot be empty. Island -> ').strip()
-                self.set_island(island)
+        # Set other attributes
+        name = input('Trail name -> ').strip()
+        while not name:
+            name = input('Name cannot be empty. Trail name -> ').strip()
+        self.set_name(name)
 
-                council = input('Municipal Council -> ').strip()
-                while not council:
-                    council = input('Council cannot be empty. Municipal Council -> ').strip()
-                self.set_council(council)
+        island = input('Island -> ').strip()
+        while not island:
+            island = input('Island cannot be empty. Island -> ').strip()
+        self.set_island(island)
 
-                coordinates = input('GPS Coordinates -> ').strip()
-                while not coordinates:
-                    coordinates = input('GPS Coordinates cannot be empty. GPS Coordinates -> ').strip()
-                self.set_coordinates_GPS(coordinates)
+        council = input('Municipal Council -> ').strip()
+        while not council:
+            council = input('Council cannot be empty. Municipal Council -> ').strip()
+        self.set_council(council)
 
-                # Difficulty
-                print("Degree of difficulty: 1. Easy, 2. Medium, 3. Hard")
-                choice = input('Choose the Degree of difficulty (1/2/3) -> ').strip()
-                while choice not in ['1', '2', '3']:
-                    choice = input('Invalid choice. Choose the Degree of difficulty (1/2/3) -> ').strip()
-                difficulties = ['Easy', 'Medium', 'Hard']
-                self.set_difficulty(difficulties[int(choice) - 1])
+        coordinates = input('GPS Coordinates -> ').strip()
+        while not coordinates:
+            coordinates = input('GPS Coordinates cannot be empty. GPS Coordinates -> ').strip()
+        self.set_coordinates_GPS(coordinates)
 
-                # Extension
-                print("Extension: 1. 0-5km, 2. 5-10km, 3. 10-15km, 4. 15-30km, 5. +30km")
-                choice = input('Choose the extension (1/2/3/4/5) -> ').strip()
-                while choice not in ['1', '2', '3', '4', '5']:
-                    choice = input('Invalid choice. Choose the extension (1/2/3/4/5) -> ').strip()
-                extensions = ['0-5km', '5-10km', '10-15km', '15-30km', '+30km']
-                self.set_extension(extensions[int(choice) - 1])
+        # Difficulty
+        print("Degree of difficulty: 1. Easy, 2. Medium, 3. Hard")
+        choice = input('Choose the Degree of difficulty (1/2/3) -> ').strip()
+        while choice not in ['1', '2', '3']:
+            choice = input('Invalid choice. Choose the Degree of difficulty (1/2/3) -> ').strip()
+        difficulties = ['Easy', 'Medium', 'Hard']
+        self.set_difficulty(difficulties[int(choice) - 1])
 
-                # Form
-                print("Form: 1. Circular, 2. Linear")
-                choice = input('Choose the format (1/2) -> ').strip()
-                while choice not in ['1', '2']:
-                    choice = input('Invalid choice. Choose the format (1/2) -> ').strip()
-                forms = ['Circular', 'Linear']
-                self.set_form(forms[int(choice) - 1])
+        # Extension
+        print("Extension: 1. 0-5km, 2. 5-10km, 3. 10-15km, 4. 15-30km, 5. +30km")
+        choice = input('Choose the extension (1/2/3/4/5) -> ').strip()
+        while choice not in ['1', '2', '3', '4', '5']:
+            choice = input('Invalid choice. Choose the extension (1/2/3/4/5) -> ').strip()
+        extensions = ['0-5km', '5-10km', '10-15km', '15-30km', '+30km']
+        self.set_extension(extensions[int(choice) - 1])
 
-                # Description
-                description = input('Brief description -> ').strip()
-                while not description:
-                    description = input('Description cannot be empty. Brief description -> ').strip()
-                self.set_description(description)
+        # Form
+        print("Form: 1. Circular, 2. Linear")
+        choice = input('Choose the format (1/2) -> ').strip()
+        while choice not in ['1', '2']:
+            choice = input('Invalid choice. Choose the format (1/2) -> ').strip()
+        forms = ['Circular', 'Linear']
+        self.set_form(forms[int(choice) - 1])
 
-                # Save trail data
-                with open(filename, 'a', encoding='utf-8') as file:
-                    trail_data = ';'.join([
-                        self.get_id(),
-                        self.get_name(),
-                        self.get_island(),
-                        self.get_council(),
-                        self.get_coordinates_GPS(),
-                        self.get_difficulty(),
-                        self.get_extension(),
-                        self.get_form(),
-                        self.get_description()
-                    ])
-                    file.write(trail_data + '\n')
-                print(f"Trail: {self.get_name()} successfully created!")
-    print("Trail creation process finished.")
+        # Description
+        description = input('Brief description -> ').strip()
+        while not description:
+            description = input('Description cannot be empty. Brief description -> ').strip()
+        self.set_description(description)
+
+        # Save trail data
+        with open(filename, 'a', encoding='utf-8') as file:
+            trail_data = ';'.join([
+                self.get_id(),
+                self.get_name(),
+                self.get_island(),
+                self.get_council(),
+                self.get_coordinates_GPS(),
+                self.get_difficulty(),
+                self.get_extension(),
+                self.get_form(),
+                self.get_description()
+            ])
+            file.write(trail_data + '\n')
+        print(f"Trail: {self.get_name()} successfully created!")
+        print("Trail creation process finished.")
 
     # Removes a Trail from the Trail File
     def remove_trail(self, filename: str):
